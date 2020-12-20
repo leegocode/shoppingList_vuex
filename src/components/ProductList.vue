@@ -2,7 +2,7 @@
 <div>
 <h1>product list</h1>
 <ul>
-  <li v-for="product in products">{{ product.title }} --- {{ product.price }}</li>
+  <li v-for="product in products"> {{ product.title }} --- {{ product.price }}</li>
 </ul>
 
 
@@ -15,10 +15,12 @@ import shop from '@/api/shop.js'
 export default {
 
   computed:{
-    products(){
-      return store.state.products
+    products () {
+      return store.getters.availableProducts
     }
+
   },
+
   created(){
     shop.getProducts(products => {
       store.commit('setProducts', products)
