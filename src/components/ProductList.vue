@@ -6,7 +6,12 @@
        src="https://i.imgur.com/JfPpwOA.gif"
      >
 <ul v-else>
-  <li v-for="product in products"> {{ product.title }} --- {{ product.price }}</li>
+  <li v-for="product in products"> {{ product.title }} --- {{ product.price }}
+    <button type="button" name="button" @click="addProductToCart(product)">
+      add to cart
+    </button>
+  </li>
+
 </ul>
 
 
@@ -26,6 +31,11 @@ export default {
       return this.$store.getters.availableProducts
     }
 
+  },
+  methods:{
+    addProductToCart(product){
+      this.$store.dispatch('addToCart', product)
+    }
   },
 
   created(){
