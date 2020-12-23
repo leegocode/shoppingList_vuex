@@ -25,10 +25,13 @@ export default new Vuex.Store({
           quantity: cartItem.quantity
         }
       })
-    }
+    },
 
+    cartTotal (state, getters){
+      return getters.cartProducts.reduce((total,product)=> total + product.price * product.quantity, 0)
 
-  },
+  }
+},
 
   mutations:{
     setProducts(state, products){
