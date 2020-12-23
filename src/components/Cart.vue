@@ -7,8 +7,12 @@
       </li>
     </ul>
   <h2>
-    Total: {{total}}
+    Total: {{total | currency}}
   </h2>
+  <button type="button" name="button" @click="$store.dispatch('checkout')">
+    checkout
+  </button>
+  <p v-if="$store.state.checkoutStatus">{{ $store.state.checkoutStatus }}</p>
 
   </div>
 </template>

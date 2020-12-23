@@ -8,7 +8,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state:{
     products:[],
-    cart:[]
+    cart:[],
+    checkoutStatus: null
   },
 
   getters:{
@@ -26,16 +27,28 @@ export default new Vuex.Store({
         }
       })
     },
-
     cartTotal (state, getters){
       return getters.cartProducts.reduce((total,product)=> total + product.price * product.quantity, 0)
+    },
 
-  }
-},
+
+
+  },
 
   mutations:{
     setProducts(state, products){
       state.products = products
+    },
+
+
+
+    setCheckoutStatus(state, status){
+      state.checkoutStatus = status
+    },
+
+    emptyCart(state){
+      state.cart = []
+
     },
 
     pushToCart(state, productId){
@@ -61,7 +74,7 @@ export default new Vuex.Store({
         shop.getProducts(products => {
           commit('setProducts', products)
           resolve()
-      })
+        })
       })
     },
 
@@ -74,11 +87,22 @@ export default new Vuex.Store({
           context.commit('incrementItemQuantity', cartItem) //購物車數量
         }
       }
-        context.commit('decrementProductInventory', product) //商數量
+      context.commit('decrementProductInventory', product) //商數量
+    },
+
+    checkout({state, commit}){
+      shop.buyProducts(
+        state.cart,
+        () => {
+        commit('emptyCart')
+        commit('setCheckoutStatus', 'success')
+        },
+        () => {
+        commit('setCheckoutStatus', 'fail')
+        })
+      }
+
 
     }
 
-
-  }
-
-})
+  })
