@@ -9,7 +9,7 @@
   <h2>
     Total: {{total | currency}}
   </h2>
-  <button type="button" name="button" @click="$store.dispatch('checkout')">
+  <button type="button" name="button" @click="checkout">
     checkout
   </button>
   <p v-if="checkoutStatus">{{ checkoutStatus }}</p>
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import {mapState, mapGetters} from 'vuex'
+import {mapState, mapGetters, mapActions} from 'vuex'
 
 export default {
 
@@ -33,6 +33,9 @@ export default {
       checkoutStatus: 'checkoutStatus'
     })
 
+  },
+  methods: {
+    ...mapActions(['checkout'])
   }
 
     //

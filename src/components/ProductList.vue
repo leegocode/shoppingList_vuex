@@ -7,7 +7,7 @@
      >
 <ul v-else>
   <li v-for="product in products"> {{ product.title }} --- {{ product.price | currency }} -- {{ product.inventory }}
-    <button type="button" name="button" :disabled=" !productIsInStock(product) " @click="addProductToCart(product)">
+    <button type="button" name="button" :disabled=" !productIsInStock(product) " @click="addToCart(product)">
       add to cart
     </button>
   </li>
@@ -20,7 +20,7 @@
 
 <script>
 import shop from '@/api/shop.js'
-import {mapState, mapGetters} from 'vuex'
+import {mapState, mapGetters, mapActions} from 'vuex'
 
 export default {
   data(){
@@ -51,14 +51,16 @@ export default {
 
 
   methods:{
-    addProductToCart(product){
-      this.$store.dispatch('addToCart', product)
-    }
+    ...mapActions({
+      fetchProducts: 'fetchProducts',
+      addToCart: 'addToCart'
+    }),
+
   },
 
   created(){
     this.loading = true
-    this.$store.dispatch('fetchProducts')
+    this.fetchProducts()
     .then(()=> this.loading = false)
 
   }
