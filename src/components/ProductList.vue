@@ -34,7 +34,7 @@ export default {
       products: state => state.products.products
     }),
 
-    ...mapGetters({
+    ...mapGetters('products',{
       productIsInStock: 'productIsInStock'
     })
 
@@ -44,8 +44,8 @@ export default {
 
   methods:{
     ...mapActions({
-      fetchProducts: 'fetchProducts',
-      addToCart: 'addToCart'
+      fetchProducts: 'products/fetchProducts',
+      addToCart: 'cart/addToCart'
     }),
 
   },

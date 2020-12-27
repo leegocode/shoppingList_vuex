@@ -1,5 +1,6 @@
 import shop from '@/api/shop.js'
 export default{
+  namespaced: true,
   state:{
     products:[],
   },
@@ -21,7 +22,6 @@ export default{
     setProducts(state, products){
       state.products = products
     },
-
 
     decrementProductInventory(state, product){
       product.inventory--
