@@ -3,18 +3,22 @@
     <ProductList/>
     <hr>
     <Cart/>
+    <Button/>
   </div>
 </template>
 
 <script>
 import ProductList from './components/ProductList'
 import Cart from './components/Cart'
+import Button from './components/Button'
 
 export default {
   name: 'App',
   components: {
     ProductList,
-    Cart
+    Cart,
+    Button
+
   }
 }
 </script>
