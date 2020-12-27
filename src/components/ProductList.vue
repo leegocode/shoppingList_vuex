@@ -31,7 +31,7 @@ export default {
   },
   computed:{
     ...mapState({
-      products: state => state.products,
+      products: state => state.products.products
     }),
 
     ...mapGetters({
@@ -39,14 +39,6 @@ export default {
     })
 
   },
-
-    // products() {
-    //   return this.$store.state.products
-    // },
-    //
-    // productIsInStock(){
-    //   return this.$store.getters.productIsInStock
-    // }
 
 
 
